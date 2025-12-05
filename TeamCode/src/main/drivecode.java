@@ -113,8 +113,8 @@ public class drivecode extends LinearOpMode {
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             // Skunkwork v2
-            double axial = gamepad2.left_stick_y;  // Note: pushing stick forward gives negative value ( strafe froward/backward
-            double lateral = -gamepad2.left_stick_x * 1.1; //strafe right/left
+            double axial = -gamepad2.left_stick_y;  // Note: pushing stick forward gives negative value ( strafe froward/backward
+            double lateral = gamepad2.left_stick_x * 1.1; //strafe right/left
             double yaw = gamepad2.right_stick_x; //turning one place
 
             //darkstar
@@ -157,7 +157,7 @@ public class drivecode extends LinearOpMode {
             // SHOOTER 1
 
             if (gamepad1.right_trigger > 0.05) {
-                shooterPower += 0.01;
+                shooterPower += 0.07;
 
                 if (shooterPower > 1) shooterPower = 1;
 
@@ -179,7 +179,7 @@ public class drivecode extends LinearOpMode {
             // SHOOTER MOTOR 2
             if (gamepad1.left_bumper) {
                 ShooterMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
-                ShooterMotor2.setPower(0.7);
+                ShooterMotor2.setPower(1);
             } else if (gamepad1.left_trigger > 0.05) {
                 ShooterMotor2.setDirection(DcMotorSimple.Direction.FORWARD);
                 ShooterMotor2.setPower(gamepad1.left_trigger);
