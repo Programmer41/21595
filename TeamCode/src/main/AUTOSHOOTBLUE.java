@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-//@Autonomous(name = "autoBLUE", group = "Linear Opmode")
+@Autonomous(name = "autoBLUE", group = "Linear Opmode")
 public class AUTOSHOOTBLUE extends LinearOpMode {
 
     private DcMotor FL = null;
@@ -37,21 +37,46 @@ public class AUTOSHOOTBLUE extends LinearOpMode {
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        //ShooterMotor1.setPower(1);
+        ShooterMotor1.setPower(1);
 
         FL.setPower(0.5);
         BL.setPower(0.5);
         FR.setPower(0.5);
         BR.setPower(0.5);
 
-        Thread.sleep(500);
+        Thread.sleep(1800);
 
         FL.setPower(0);
         BL.setPower(0);
         FR.setPower(0);
         BR.setPower(0);
 
-        //ShooterMotor2.setPower(1);
+        sleep(4000);
+
+        ShooterMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        ShooterMotor2.setPower(1);
+
+        sleep(4000);
+
+        FL.setDirection(DcMotorSimple.Direction.FORWARD);
+        BL.setDirection(DcMotorSimple.Direction.REVERSE);
+        FR.setDirection(DcMotorSimple.Direction.FORWARD);
+        BR.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        FL.setPower(0.5);
+        BL.setPower(0.5);
+        FR.setPower(0.5);
+        BR.setPower(0.5);
+
+        Thread.sleep(1000);
+
+        FL.setPower(0);
+        BL.setPower(0);
+        FR.setPower(0);
+        BR.setPower(0);
+
+        ShooterMotor1.setPower(0);
+        ShooterMotor2.setPower(0);
     }
 }
-
