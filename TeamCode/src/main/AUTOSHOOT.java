@@ -59,17 +59,17 @@ public class AUTOSHOOT extends LinearOpMode {
 
         sleep(4000);
 
-        FL.setDirection(DcMotorSimple.Direction.FORWARD);
-        BL.setDirection(DcMotorSimple.Direction.REVERSE);
-        FR.setDirection(DcMotorSimple.Direction.FORWARD);
-        BR.setDirection(DcMotorSimple.Direction.REVERSE);
+        FL.setDirection(DcMotorSimple.Direction.REVERSE);
+        BL.setDirection(DcMotorSimple.Direction.FORWARD);
+        FR.setDirection(DcMotorSimple.Direction.REVERSE);
+        BR.setDirection(DcMotorSimple.Direction.FORWARD);
 
         FL.setPower(0.5);
         BL.setPower(0.5);
         FR.setPower(0.5);
         BR.setPower(0.5);
 
-        Thread.sleep(400);
+        Thread.sleep(1000);
 
         FL.setPower(0);
         BL.setPower(0);
