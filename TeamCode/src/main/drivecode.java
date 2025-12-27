@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -19,6 +20,11 @@ public class drivecode extends LinearOpMode {
     private DcMotor BR = null;
     private DcMotor ShooterMotor1 = null;
     private DcMotor ShooterMotor2 = null;
+
+    private Servo servoOne = null;
+    private Servo servoTwo = null;
+
+
     double speedLimiter = 1.65;
     double Voltage;
     double shooterPower = 0;
@@ -35,6 +41,9 @@ public class drivecode extends LinearOpMode {
         ShooterMotor1 = hardwareMap.get(DcMotor.class, "ShooterMotor1");
         ShooterMotor2 = hardwareMap.get(DcMotor.class, "ShooterMotor2");
 
+        servoOne = hardwareMap.get(Servo.class, "servoOne");
+        servoTwo = hardwareMap.get(Servo.class, "servoTwo");
+
 //         For Skunkworks
 //        FL.setDirection(DcMotor.Direction.REVERSE);
 //        BL.setDirection(DcMotor.Direction.REVERSE);
@@ -42,6 +51,8 @@ public class drivecode extends LinearOpMode {
 //        BR.setDirection(DcMotor.Direction.FORWARD);
 
         // For basic bot
+        servoTwo.setDirection(Servo.Direction.REVERSE);
+
         FL.setDirection(DcMotor.Direction.REVERSE);
         BL.setDirection(DcMotor.Direction.REVERSE);
         FR.setDirection(DcMotor.Direction.FORWARD);
@@ -154,6 +165,15 @@ public class drivecode extends LinearOpMode {
             BR.setPower(rightBackPower);
 
 
+            //SERVO CONTROL
+            if (gamepad2.x) {
+                servoOne.setPosition(0.2);
+                servoTwo.setPosition(0.2);
+            } else if (gamepad2.b) {
+                servoOne.setPosition(0.8);
+                servoTwo.setPosition(0.8);
+            }
+
             // SHOOTER 1
 
             if (gamepad1.right_trigger > 0.05) {
@@ -208,6 +228,8 @@ public class drivecode extends LinearOpMode {
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
             telemetry.addData("Current speedLimiter: ", speedLimiter);
+            telemetry.addData("Servo 1 Pos", servoOne.getPosition()); // ADDED
+            telemetry.addData("Servo 2 Pos", servoTwo.getPosition());
             telemetry.update();
         }
     }
