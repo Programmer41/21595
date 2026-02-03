@@ -51,7 +51,7 @@ public class drivecode extends LinearOpMode {
 //        BR.setDirection(DcMotor.Direction.FORWARD);
 
         // For basic bot
-        servoTwo.setDirection(Servo.Direction.REVERSE);
+        servoTwo.setDirection(Servo.Direction.FORWARD);
 
         FL.setDirection(DcMotor.Direction.REVERSE);
         BL.setDirection(DcMotor.Direction.REVERSE);
@@ -167,11 +167,11 @@ public class drivecode extends LinearOpMode {
 
             //SERVO CONTROL
             if (gamepad2.x) {
-                servoOne.setPosition(0.2);
-                servoTwo.setPosition(0.2);
+                servoOne.setPosition(0.38);
+                servoTwo.setPosition(0.38);
             } else if (gamepad2.b) {
-                servoOne.setPosition(0.8);
-                servoTwo.setPosition(0.8);
+                servoOne.setPosition(1.6);
+                servoTwo.setPosition(1.6);
             }
 
             // SHOOTER 1
