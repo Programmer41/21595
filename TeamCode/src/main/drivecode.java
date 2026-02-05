@@ -14,6 +14,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class drivecode extends LinearOpMode {
 
     private final ElapsedTime runtime = new ElapsedTime();
+
+    // SHOOTER 2 CYCLE
+    private final ElapsedTime shooterTimer = new ElapsedTime();
+    private boolean timerStarted = false;
+    // END
+
     private DcMotor FL = null;
     private DcMotor BL = null;
     private DcMotor FR = null;
@@ -51,7 +57,9 @@ public class drivecode extends LinearOpMode {
 //        BR.setDirection(DcMotor.Direction.FORWARD);
 
         // For basic bot
-        servoTwo.setDirection(Servo.Direction.FORWARD);
+        servoTwo.setDirection(Servo.Direction.REVERSE);
+        servoOne.setDirection(Servo.Direction.FORWARD);
+
 
         FL.setDirection(DcMotor.Direction.REVERSE);
         BL.setDirection(DcMotor.Direction.REVERSE);
@@ -167,11 +175,19 @@ public class drivecode extends LinearOpMode {
 
             //SERVO CONTROL
             if (gamepad2.x) {
-                servoOne.setPosition(0.38);
-                servoTwo.setPosition(0.38);
+                servoOne.setPosition(0.2); // port 1
+                servoTwo.setPosition(0.5); // port 5
             } else if (gamepad2.b) {
-                servoOne.setPosition(1.6);
-                servoTwo.setPosition(1.6);
+                servoOne.setPosition(0.50); // PORT 1
+                servoTwo.setPosition(0.75); // PORT 5
+            }
+
+            //ZEROING SERVOS
+            //****IF BOTH X AND B ARE PRESSED AT THE SAME TIME, THEN THEY RESET TO ORIGINAL POSITION, WHICH IS THE OPEN POSITION
+
+            else if (gamepad2.x && gamepad2.b) {
+                servoOne.setPosition(0.1);
+                servoTwo.setPosition(0.1);
             }
 
             // SHOOTER 1
@@ -197,7 +213,7 @@ public class drivecode extends LinearOpMode {
             }
 
             // SHOOTER MOTOR 2
-            if (gamepad1.left_bumper) {
+            /*if (gamepad1.left_bumper) {
                 ShooterMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
                 ShooterMotor2.setPower(1);
             } else if (gamepad1.left_trigger > 0.05) {
@@ -206,6 +222,35 @@ public class drivecode extends LinearOpMode {
             } else {
                 ShooterMotor2.setPower(0);
 
+            }*/
+
+            // UPDATED SHOOT MOTOR 2 TEST
+            if (gamepad1.left_bumper) {
+                ShooterMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
+                ShooterMotor2.setPower(1);
+                timerStarted = false; // reset timer incase it was running
+            } else if (gamepad1.left_trigger > 0.05) {
+                if (!timerStarted) {
+                    shooterTimer.reset();
+                    timerStarted = true;
+                }
+
+                // Reset cycle after 3 seconds total, 1.5s running , 1.5s pause
+                if (shooterTimer.seconds() >= 1.3) {
+                    shooterTimer.reset();
+                }
+
+                if (shooterTimer.seconds() < 0.65) {
+                    // run forward for first 0.65 seconds
+                    ShooterMotor2.setDirection(DcMotorSimple.Direction.FORWARD);
+                    ShooterMotor2.setPower(gamepad1.left_trigger);
+                } else {
+                    // pause for next 0.65 seconds
+                    ShooterMotor2.setPower(0);
+                }
+            } else {
+                ShooterMotor2.setPower(0);
+                timerStarted = false;
             }
 
 
