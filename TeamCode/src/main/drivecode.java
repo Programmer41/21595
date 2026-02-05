@@ -244,7 +244,7 @@ public class drivecode extends LinearOpMode {
                 if (shooterTimer.seconds() < 0.65) {
                     // run forward for first 0.65 seconds
                     ShooterMotor2.setDirection(DcMotorSimple.Direction.FORWARD);
-                    ShooterMotor2.setPower(gamepad1.left_trigger);
+                    ShooterMotor2.setPower(1.0);
                 } else {
                     // pause for next 0.65 seconds
                     ShooterMotor2.setPower(0);
