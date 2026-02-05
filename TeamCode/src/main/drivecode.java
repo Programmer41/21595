@@ -225,11 +225,12 @@ public class drivecode extends LinearOpMode {
             }*/
 
             // UPDATED SHOOT MOTOR 2 TEST
-            if (gamepad1.left_bumper) {
+            if (gamepad1.left_trigger > 0.05) {
                 ShooterMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
                 ShooterMotor2.setPower(1);
-                timerStarted = false; // reset timer incase it was running
-            } else if (gamepad1.left_trigger > 0.05) {
+                timerStarted = false; // reset timer incase it was running to not start while reverse
+            } else if (gamepad1.left_bumper) {
+                // once button is pressed, the timer runs every time we press the button, making sure it resets
                 if (!timerStarted) {
                     shooterTimer.reset();
                     timerStarted = true;
