@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name = "autoRED", group = "Linear Opmode")
 public class AUTOSHOOT extends LinearOpMode {
@@ -17,6 +18,9 @@ public class AUTOSHOOT extends LinearOpMode {
 
     private DcMotor ShooterMotor2 = null;
 
+    private Servo servoOne, servoTwo;
+
+
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -26,6 +30,14 @@ public class AUTOSHOOT extends LinearOpMode {
         BR = hardwareMap.get(DcMotor.class, "BR");
         ShooterMotor1 = hardwareMap.get(DcMotor.class, "ShooterMotor1");
         ShooterMotor2 = hardwareMap.get(DcMotor.class, "ShooterMotor2");
+        servoOne = hardwareMap.get(Servo.class, "servoOne");
+        servoTwo = hardwareMap.get(Servo.class, "servoTwo");
+
+        servoTwo.setDirection(Servo.Direction.REVERSE);
+        servoOne.setDirection(Servo.Direction.FORWARD);
+
+        servoOne.setPosition(0.50);
+        servoTwo.setPosition(0.75);
 
         FL.setDirection(DcMotorSimple.Direction.REVERSE);
         BL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -50,6 +62,9 @@ public class AUTOSHOOT extends LinearOpMode {
         BL.setPower(0);
         FR.setPower(0);
         BR.setPower(0);
+
+        servoOne.setPosition(0.2);
+        servoTwo.setPosition(0.5);
 
         sleep(4000);
 
