@@ -213,7 +213,7 @@ public class drivecode extends LinearOpMode {
             }
 
             // SHOOTER MOTOR 2
-            /*if (gamepad1.left_bumper) {
+            while (gamepad1.left_bumper) {
                 ShooterMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
                 ShooterMotor2.setPower(1);
             } else if (gamepad1.left_trigger > 0.05) {
@@ -222,21 +222,21 @@ public class drivecode extends LinearOpMode {
             } else {
                 ShooterMotor2.setPower(0);
 
-            }*/
+            }
 
             // UPDATED SHOOT MOTOR 2 TEST
             if (gamepad1.left_trigger > 0.05) {
                 ShooterMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
                 ShooterMotor2.setPower(1);
                 timerStarted = false; // reset timer incase it was running to not start while reverse
-            } else if (gamepad1.left_bumper) {
+            } else if (gamepad1.y) {
                 // once button is pressed, the timer runs every time we press the button, making sure it resets
                 if (!timerStarted) {
                     shooterTimer.reset();
                     timerStarted = true;
                 }
 
-                // Reset cycle after 3 seconds total, 1.5s running , 1.5s pause
+                // Reset cycle after 1.3 seconds total, 0.65s running , 0.65s pause
                 if (shooterTimer.seconds() >= 1.3) {
                     shooterTimer.reset();
                 }
